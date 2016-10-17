@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+{% for link in object_list%}
+<h1>{{link.title}}, {{link.created}}, {{link.user}}</h1>
+<a href="{{link.new_link}}">{{link.title}}</a>
+
+{% endfor %}
+{% endblock %}
