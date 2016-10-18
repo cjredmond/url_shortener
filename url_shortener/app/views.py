@@ -16,7 +16,7 @@ class UserCreateView(CreateView):
 class LinkUpdateView(UpdateView):
     model = Link
     success_url = "/"
-    fields = ("url", "title", "description")
+    fields = ('url', 'title', 'description', 'public')
 
 class LinkListView(ListView):
     model = Link
@@ -24,20 +24,20 @@ class LinkListView(ListView):
 class LinkCreateView(CreateView):
     model = Link
     success_url = "/"
-    fields = ('url', 'title', 'description')
+    fields = ('url', 'title', 'description', 'public')
 
     def new_link(self):
-        letter = ["a", "b", "c", "d", "e", "f", "g"]
+        letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
         randomindex = random.randint(0,len(letter)-1)
         rand_letter = letter[randomindex]
-        random_num = random.randint(1,7)
+        random_num = random.randint(1,4)
         stuff = str(rand_letter * random_num)
         return stuff
 
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.user = self.request.user
-        instance.short_url = self.new_link()
+        instance.short_url = str(self.new_link() + self.new_link() + self.new_link())
         return super().form_valid(form)
 
 class LinkView(View):

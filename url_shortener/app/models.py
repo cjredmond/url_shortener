@@ -8,7 +8,7 @@ class Link(models.Model):
     user = models.ForeignKey('auth.User')
     created = models.DateTimeField(auto_now_add=True)
     short_url = models.CharField(max_length = 40)
-
+    public = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created']
@@ -16,20 +16,12 @@ class Link(models.Model):
     def __str__(self):
         return self.title
 
-
-
     @property
     def count(self):
-        return sum([hit_obj.count for hit_obj in self.hit_set.all()])
+        return self.hit_set.all().count
 
 
 class Hit(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     link = models.ForeignKey(Link)
     clicked = models.BooleanField()
-
-
-    @property
-    def count(self):
-        if self.clicked:
-            return 1
