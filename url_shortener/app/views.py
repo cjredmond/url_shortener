@@ -20,6 +20,19 @@ class LinkUpdateView(UpdateView):
 
 class LinkListView(ListView):
     model = Link
+    def get_context_data(self):
+        context = super().get_context_data()
+        if not self.request.user.is_authenticated:
+            public = Link.objects.filter(public = True)
+            context["public"] = public
+        else:
+            user_link = Link.objects.filter(user= self.request.user)
+            public = Link.objects.filter(public = True)
+            public_ex = public.exclude(user = self.request.user)
+            context["user_link"] = user_link
+            context["public_ex"] = public_ex
+        return context
+
 
 class LinkCreateView(CreateView):
     model = Link

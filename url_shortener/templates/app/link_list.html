@@ -2,8 +2,8 @@
 {% block content %}
 
 {% if not request.user.is_authenticated %}
-{% for link in object_list %}
-{% if link.public == True %}
+{% for link in public %}
+
 
 <div class="panel panel-default">
  <div class="panel-body">
@@ -19,7 +19,7 @@
 </div>
 </div>
 
-{% endif %}
+
 {% endfor %}
 {% else %}
 
@@ -39,22 +39,31 @@
     <div class="panel-body">
       <form class="" action="{% url 'link_create_view' %}" method="post">
         {% csrf_token %}
-        URL: <input class = "box" type="text" name="url" value=""><br>
-        TITLE: <input class = "box" type="text" name="title" value=""><br>
-        DESC: <input class = "box" type="text" name="description" value=""><br>
-        PUBLIC? <input type="checkbox" name="public" value="">
-        <input type="submit" name="name" value="Add">
+        <div class="row">
+          <div class="col-md-2">
+          <div class="categories">
+             URL <br> TITLE <br> DESC <br> <br> PUBLIC?     </div> </div>
+            <div class="col-md-9">
+              <input class = "box" type="text" name="url" value=""><br>
+              <input class = "box" type="text" name="title" value=""><br>
+              <input class = "box" type="text" name="description" value=""><br><br>
+              <input type="checkbox" name="public" value="">
+              <input type="submit" name="name" value="Add">
+            </div>
+          </div>
       </form>
     </div>
   </div>
 
 
-{% for link in object_list %}
-{% if link.user == request.user %}
+{% for link in user_link %}
+
 
 <div class="panel panel-default">
+   <div class="panel-heading">
+ <h3>{{ link.title }} by {{ link.user }}</h3>
+   </div>
  <div class="panel-body">
-   <h3>{{ link.title }} by {{ link.user }}</h3>
     <h4>{{ link.description }}</h4>
       <h4><a href="{% url 'pass_through_view' link.short_url%}">localhost:8000/pass/{{ link.short_url }}</a></h4>
         Hits: {{ link.count }}<br>
@@ -69,21 +78,23 @@
 </div>
 
 
-{% endif %}
+
 {% endfor %}
 {% endif %}
 </div>
 <div class="col-md-5">
 
-  <div class="panel panel-default">
-   <div class="panel-body">
-     <h3>Public Links</h3>
-   </div>
- </div>
 
 {% if request.user.is_authenticated %}
-{% for link in object_list %}
-{% if link.public == True and link.user != request.user %}
+<div class="panel panel-default">
+ <div class="panel-body">
+   <h3>Public Links</h3>
+ </div>
+</div>
+{% for link in public_ex %}
+
+
+
 <div class="panel panel-default">
  <div class="panel-heading">
 <h3>{{ link.title }} by {{ link.user }}</h3>
@@ -95,7 +106,7 @@
      </div>
  </div>
 
-{% endif %}
+
 {% endfor %}
 {% endif %}
 </div>
