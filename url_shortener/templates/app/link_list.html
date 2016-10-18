@@ -3,10 +3,15 @@
 {% block content%}
 
 {% for link in object_list%}
-<h1>{{link.short_url}}</h1>
-<h1>{{link.title}}, {{link.created}}, {{link.user}}</h1>
-<a href="{% url 'pass_through_view' link.short_url%}">{{link.title}}</a>
+   {% csrf_token %}
 
+
+<h2>{{link.title}} by {{link.user}}</h1>
+  <br>
+  <h4>{{link.description}}</h4>
+<h3><a href="{% url 'pass_through_view' link.short_url%}">localhost:8000/pass/{{link.short_url}}</a></h3>
+Hits: {{link.count}}<br>
+<a href="{% url 'link_update_view' link.id%}">Edit Link</a>
 {% endfor %}
-link_list
+
 {% endblock %}
