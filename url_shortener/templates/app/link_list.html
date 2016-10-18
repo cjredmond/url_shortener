@@ -5,6 +5,8 @@
 {% for link in object_list%}
    {% csrf_token %}
 
+<div class="item">
+
 
 <h2>{{link.title}} by {{link.user}}</h1>
   <br>
@@ -13,5 +15,5 @@
 Hits: {{link.count}}<br>
 <a href="{% url 'link_update_view' link.id%}">Edit Link</a>
 {% endfor %}
-
+</div>
 {% endblock %}

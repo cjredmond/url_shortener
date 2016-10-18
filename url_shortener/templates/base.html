@@ -5,11 +5,17 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
     <meta charset="utf-8">
     <title></title>
+    <style media="screen">
+      .item {
+        border: solid black 3px;
+      }
+    </style>
   </head>
   <body>
 <div class="menu">
-  <a href="{% url 'user_create_view'%}">Create User</a>
-  <a href="{% url 'link_create_view'%}">Add link</a>
+  <a href="{% url 'user_create_view'%}">Create User</a> |
+  <a href="{% url 'link_create_view'%}">Add link</a> |
+  <a href="http://localhost:8000/login/">Login</a> 
 
 
 
