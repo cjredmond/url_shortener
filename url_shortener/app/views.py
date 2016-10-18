@@ -44,8 +44,6 @@ class LinkView(View):
     model = Link
 
     def get(self, request, short_url):
-        target = self.kwargs['short_url']
-        x = Link.objects.get(short_url = target)
-        print("0"* 20)
+        x = Link.objects.get(short_url = short_url)
         Hit.objects.create(link = x,  clicked=True)
         return HttpResponseRedirect("{}".format(x.url))

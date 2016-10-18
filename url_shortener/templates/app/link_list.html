@@ -5,7 +5,9 @@
 {% for link in object_list%}
    {% csrf_token %}
 
-<div class="item">
+   <div class="panel panel-default">
+     <div class="panel-body">
+
 
 
 <h2>{{link.title}} by {{link.user}}</h1>
@@ -14,6 +16,8 @@
 <h3><a href="{% url 'pass_through_view' link.short_url%}">localhost:8000/pass/{{link.short_url}}</a></h3>
 Hits: {{link.count}}<br>
 <a href="{% url 'link_update_view' link.id%}">Edit Link</a>
-{% endfor %}
 </div>
+</div>
+{% endfor %}
+
 {% endblock %}
