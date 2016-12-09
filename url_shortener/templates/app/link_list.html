@@ -21,41 +21,49 @@
 
 
 {% endfor %}
+<!-- #################################### -->
 {% else %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading add-new">
+        <h3>Add New</h3>
+      </div>
+     <div class="panel-body">
+       <form name="form" class="" action="{% url 'link_create_view' %}" method="post">
+         {% csrf_token %}
+         <div class="row">
+           <div class="col-md-2">
+             <div class="row input-box"> URL </div>
+             <div class="row input-box"> TITLE  </div>
+             <div class="row input-box"> DESC </div>
+             <div class="row input-box"> PUBLIC? </div>
+           </div>
+             <div class="col-md-6">
+               <div class="row input-box"> <input class="box" type="text" name="url" value=""> </div>
+               <div class="row input-box"> <input class="box" type="text" name="title" value=""> </div>
+               <div class="row input-box"> <input class="box" type="text" name="description" value=""> </div>
+               <div class="row input-box"> <input type="checkbox" name="public" value="True">
+                </div>
+             </div>
+             <div class="col-md-3">
+               <input type="submit" onclick="fillForm();" class="btn btn-primary add-link" name="name" value="Add">
+             </div>
+           </div>
+       </form>
+     </div>
+   </div>
 
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-7">
     <div class="panel panel-default">
-     <div class="panel-body">
+     <div class="panel-body link-tab-top">
        <h3>Personal Links</h3>
      </div>
    </div>
-
-   <div class="panel panel-default">
-     <div class="panel-heading">
-       <h3>Add New</h3>
-     </div>
-    <div class="panel-body">
-      <form class="" action="{% url 'link_create_view' %}" method="post">
-        {% csrf_token %}
-        <div class="row">
-          <div class="col-md-2">
-          <div class="categories">
-             URL <br> TITLE <br> DESC <br> <br> PUBLIC?     </div> </div>
-            <div class="col-md-9">
-              <input class = "box" type="text" name="url" value=""><br>
-              <input class = "box" type="text" name="title" value=""><br>
-              <input class = "box" type="text" name="description" value=""><br><br>
-              <input type="checkbox" name="public" value="True">
-              <input type="submit" name="name" value="Add">
-            </div>
-          </div>
-      </form>
-    </div>
-  </div>
-
-
 {% for link in user_link %}
 
 
@@ -77,23 +85,17 @@
 </div>
 </div>
 
-
-
 {% endfor %}
 {% endif %}
 </div>
 <div class="col-md-5">
-
-
 {% if request.user.is_authenticated %}
 <div class="panel panel-default">
- <div class="panel-body">
+ <div class="panel-body link-tab-top">
    <h3>Public Links</h3>
  </div>
 </div>
 {% for link in public_ex %}
-
-
 
 <div class="panel panel-default">
  <div class="panel-heading">
@@ -113,4 +115,15 @@
 </div>
 
 
+{% endblock %}
+{% block extrascript %}
+<script type="text/javascript">
+  function fillForm() {
+    if (document.forms['form'].url.value === "" || document.forms['form'].title.value === "") {
+    alert("Please fill in all fields");
+    return false;
+    }
+    return true;
+  }
+</script>
 {% endblock %}

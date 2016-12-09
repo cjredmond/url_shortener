@@ -1,7 +1,14 @@
-<h1>add link</h1>
-<form class="" action="" method="post">
-  {% csrf_token %}
-{{form}}
-<input type="submit" name="" value="submit">
+<h1>Add Link</h1>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-9">
 
-</form>
+  <form class="" action="" method="post">
+    {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" name="" value="submit">
+  </form>
+
+</div>
+
+</div>

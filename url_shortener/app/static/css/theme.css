@@ -3,8 +3,30 @@ body {
 }
 
 .box {
-  width: 400px;
+  width: 350px;
 }
 .categories {
   font-size: 18px;
+}
+
+.input-box {
+  height: 30px;
+  margin-left: 0px;
+}
+
+.add-link {
+  background-color: silver;
+  color: black;
+  height: 100px;
+  width: 190px;
+  margin-right: 10px !important;
+}
+
+.add-new {
+  background-color: silver !important;
+}
+
+.link-tab-top {
+  background-color: lightgrey;
+  text-align: center;
 }
