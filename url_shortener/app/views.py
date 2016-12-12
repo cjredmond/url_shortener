@@ -40,7 +40,7 @@ class LinkCreateView(CreateView):
     fields = ('url', 'title', 'description', 'public')
 
     def new_link(self):
-        letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
+        letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"]
         randomindex = random.randint(0,len(letter)-1)
         rand_letter = letter[randomindex]
         random_num = random.randint(1,4)
